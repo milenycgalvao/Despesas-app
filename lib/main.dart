@@ -46,20 +46,21 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Column(
-              //o ... pega cada elemento da lista e coloca em outra lista
-              /*podia por assim dentro do children
-              <Widget>[
-                  ..._transactions.map((tr) {
-                    return Card(
-                      child: Text(tr.title),
-                    );
-                  }).toList(),
-                ])
-              ],*/
               children: _transactions.map((tr) {
                 return Card(
-                  child: Text(tr.title),
-                );
+                    child: Row(
+                  children: [
+                    Container(
+                      child: Text(tr.value.toString()),
+                    ),
+                    Column(
+                      children: [
+                        Text(tr.title),
+                        Text(tr.date.toString()),
+                      ],
+                    )
+                  ],
+                ));
               }).toList(),
             )
           ],
