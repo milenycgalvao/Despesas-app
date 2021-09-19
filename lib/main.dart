@@ -1,5 +1,6 @@
 import 'package:despesas/src/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(DespesasApp());
 
@@ -60,7 +61,8 @@ class MyHomePage extends StatelessWidget {
                       )),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        tr.value.toString(),
+                        //da p concatenar c R$ tbm
+                        'R\$ ${tr.value.toStringAsFixed(2)}', //mostrando 2 casas decimais
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -79,7 +81,8 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          tr.date.toString(),
+                          //tem varias outras formatacoes disponives
+                          DateFormat('d MMM y').format(tr.date),
                           style: TextStyle(
                             color: Colors.grey,
                           ),
