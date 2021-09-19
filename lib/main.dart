@@ -15,6 +15,9 @@ class DespesasApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
   final _transactions = [
     //lista provisoria que nao vai ser alterada ainda
     Transaction(
@@ -34,14 +37,18 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Despesas'),
+          backgroundColor: Colors.purple,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               child: Card(
-                color: Colors.blue,
-                child: Text('Gráfico'),
+                color: Colors.purple,
+                child: Text(
+                  'Gráfico',
+                  style: TextStyle(color: Colors.white),
+                ),
                 elevation: 5,
               ),
             ),
@@ -60,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                       )),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        'R\$ ${tr.value.toStringAsFixed(2)}', //mostrando 2 casas decimais
+                        'R\$ ${tr.value.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -97,18 +104,22 @@ class MyHomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     TextField(
-                      //lugar p escrever
+                      controller: titleController,
                       decoration: InputDecoration(
                         labelText: 'Título',
                       ),
                     ),
                     TextField(
+                      controller: valueController,
                       decoration: InputDecoration(
                         labelText: 'Valor (R\$)',
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleController.text);
+                        print(valueController.text);
+                      },
                       child: Text('Nova Transação'),
                       style: TextButton.styleFrom(primary: Colors.red.shade800),
                     )
