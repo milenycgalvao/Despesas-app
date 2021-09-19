@@ -36,7 +36,6 @@ class MyHomePage extends StatelessWidget {
           title: Text('Despesas'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
@@ -61,7 +60,6 @@ class MyHomePage extends StatelessWidget {
                       )),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        //da p concatenar c R$ tbm
                         'R\$ ${tr.value.toStringAsFixed(2)}', //mostrando 2 casas decimais
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -81,7 +79,6 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          //tem varias outras formatacoes disponives
                           DateFormat('d MMM y').format(tr.date),
                           style: TextStyle(
                             color: Colors.grey,
@@ -92,6 +89,32 @@ class MyHomePage extends StatelessWidget {
                   ],
                 ));
               }).toList(),
+            ),
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    TextField(
+                      //lugar p escrever
+                      decoration: InputDecoration(
+                        labelText: 'Título',
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Valor (R\$)',
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Nova Transação'),
+                      style: TextButton.styleFrom(primary: Colors.red.shade800),
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         ));
