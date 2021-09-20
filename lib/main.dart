@@ -21,21 +21,24 @@ class MyHomePage extends StatelessWidget {
           title: Text('Despesas'),
           backgroundColor: Colors.purple,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              child: Card(
-                color: Colors.purple,
-                child: Text(
-                  'Gráfico',
-                  style: TextStyle(color: Colors.white),
+        body: SingleChildScrollView(
+          //p fazer a rolagem
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                child: Card(
+                  color: Colors.purple,
+                  child: Text(
+                    'Gráfico',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  elevation: 5,
                 ),
-                elevation: 5,
               ),
-            ),
-            TransactionUser(),
-          ],
+              TransactionUser(),
+            ],
+          ),
         ));
   }
 }
