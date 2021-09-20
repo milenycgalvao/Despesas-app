@@ -8,6 +8,21 @@ class TransactionForm extends StatelessWidget {
 
   TransactionForm(this.onSubmit);
 
+  _submitForm() {
+    print(titleController.text);
+    print(valueController.text);
+
+    final title = titleController.text;
+    final value = double.parse(valueController.text);
+
+    //p nao deixar chamar o on sobmit sem nada ou apenas c o titulo
+    if (title.isEmpty || value <= 0) {
+      return;
+    }
+
+    onSubmit(title, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,23 +36,20 @@ class TransactionForm extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Título',
               ),
+              onSubmitted: (_) => _submitForm(),
             ),
             TextField(
               controller: valueController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              //assim ^ os decimais aparecem tanto no android quanto no ios
               decoration: InputDecoration(
                 labelText: 'Valor (R\$)',
               ),
+              onSubmitted: (_) => _submitForm(),
+              //assim porque onSubmited nao aceita funcao sem parametro
             ),
             TextButton(
-              onPressed: () {
-                print(titleController.text);
-                print(valueController.text);
-
-                final title = titleController.text;
-                final value = double.parse(valueController.text);
-                //transforma a string em double e se nao conseguir transforma em 0.0
-                onSubmit(title, value);
-              },
+              onPressed: _submitForm,
               child: Text('Nova Transação'),
               style: TextButton.styleFrom(primary: Colors.red.shade800),
             )
