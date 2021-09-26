@@ -10,12 +10,19 @@ main() => runApp(DespesasApp());
 class DespesasApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData();
     return MaterialApp(
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: theme.colorScheme.copyWith(
+          secondary: Colors.red.shade800, //faz o que faz o accentColor
+          primary: Colors.purple.shade800, //faz o que faz o primaryColor
+        ),
+      ),
     );
   }
-}
+} //colorScheme.secondary
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -48,6 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       transactions.add(newTransaction);
     });
+
+    //widget do tipo statefull
+    Navigator.of(context).pop(); //fechando o modal
   }
 
   _openTransactionsFormModal(BuildContext context) {
@@ -60,10 +70,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //p poder chamar as cores temas dentro do build (ou outra classe/arquivo)
+    final ThemeData theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Despesas'),
-        backgroundColor: Colors.purple,
         actions: [
           //widget
           IconButton(
@@ -78,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               child: Card(
-                color: Colors.purple,
+                color: theme.colorScheme.primary,
                 child: Text(
                   'Gráfico',
                   style: TextStyle(color: Colors.white),
