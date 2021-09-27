@@ -1,6 +1,8 @@
 import 'package:despesas/components/transaction_form.dart';
 import 'package:despesas/src/transaction.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'dart:math';
 
 import 'components/transaction_list.dart';
@@ -19,6 +21,8 @@ class DespesasApp extends StatelessWidget {
           secondary: Colors.red.shade800, //faz o que faz o accentColor
           primary: Colors.purple.shade800, //faz o que faz o primaryColor
         ),
+        //alterar de forma global a fonte:
+        fontFamily: 'Quicksand',
       ),
     );
   }
@@ -75,7 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas'),
+        title: Text(
+          'Despesas',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         actions: [
           //widget
           IconButton(
