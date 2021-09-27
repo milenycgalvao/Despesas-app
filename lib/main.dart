@@ -1,3 +1,4 @@
+import 'package:despesas/components/chart.dart';
 import 'package:despesas/components/transaction_form.dart';
 import 'package:despesas/src/transaction.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,17 +37,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
     //lista provisoria que nao vai ser alterada ainda
-    /*Transaction(
-        id: 't1',
+    Transaction(
+        id: 't0',
         title: 'Conta de Internet',
         value: 230.80,
-        date: DateTime.now()),
+        date: DateTime.now().subtract(Duration(days: 1))),
     Transaction(
-        id: 't2',
+        id: 't1',
         title: 'Comprinha na Shopee',
         value: 23.45,
-        date: DateTime.now()),*/
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: 't2',
+        title: 'Conta aghk',
+        value: 47.89,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+      id: 't3',
+      title: 'Conta aaa',
+      value: 40.90,
+      date: DateTime.now(),
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return transactions.where((tr) {
+      //retorna um bool
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -75,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //p poder chamar as cores temas dentro do build (ou outra classe/arquivo)
-    final ThemeData theme = Theme.of(context);
+    //final ThemeData theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -95,16 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              child: Card(
-                color: theme.colorScheme.primary,
-                child: Text(
-                  'Gráfico',
-                  style: TextStyle(color: Colors.white),
-                ),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions), //grafico
             TransactionList(transactions),
           ],
         ),
