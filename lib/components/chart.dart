@@ -46,17 +46,23 @@ class Chart extends StatelessWidget {
 
     return Card(
       elevation: 4,
-      margin: EdgeInsets.all(5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: groupedTransactions.map((tr) {
-          return ChartBar(
-              label: tr['day'].toString(),
-              percentage:
-                  double.parse(tr['value'].toString()) / _weekTotalValue,
-              valueDay: double.parse(tr['value'].toString()));
-          //Text('${tr['day']} : ${tr['value']} ');
-        }).toList(),
+      margin: EdgeInsets.all(10),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map((tr) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  label: tr['day'].toString(),
+                  percentage:
+                      double.parse(tr['value'].toString()) / _weekTotalValue,
+                  valueDay: double.parse(tr['value'].toString())),
+            );
+            //Text('${tr['day']} : ${tr['value']} ');
+          }).toList(),
+        ),
       ),
     );
   }
