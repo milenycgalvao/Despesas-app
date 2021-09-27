@@ -34,9 +34,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final transactions = [
+  final List<Transaction> transactions = [
     //lista provisoria que nao vai ser alterada ainda
-    Transaction(
+    /*Transaction(
         id: 't1',
         title: 'Conta de Internet',
         value: 230.80,
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         id: 't2',
         title: 'Comprinha na Shopee',
         value: 23.45,
-        date: DateTime.now()),
+        date: DateTime.now()),*/
   ];
 
   _addTransaction(String title, double value) {
