@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, DateTime) onSubmit;
 
   TransactionForm(this.onSubmit);
 
@@ -11,22 +12,39 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final titleController = TextEditingController();
-
   final valueController = TextEditingController();
+  var _selectedDate = DateTime.now();
 
   _submitForm() {
     print(titleController.text);
     print(valueController.text);
+    print(_selectedDate);
 
     final title = titleController.text;
     final value = double.parse(valueController.text);
+    final DateTime date = _selectedDate;
 
     //p nao deixar chamar o on sobmit sem nada ou apenas c o titulo
     if (title.isEmpty || value <= 0) {
       return;
     }
 
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, date);
+  }
+
+  _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      //aqui dentro só acontece quando o usuario da ok na data escolhida
+      setState(() {
+        _selectedDate = pickedDate!;
+        print(_selectedDate);
+      });
+    });
   }
 
   @override
@@ -54,10 +72,34 @@ class _TransactionFormState extends State<TransactionForm> {
               onSubmitted: (_) => _submitForm(),
               //assim porque onSubmited nao aceita funcao sem parametro
             ),
-            TextButton(
+            Row(
+              children: [
+                TextButton(
+                  onPressed: _showDatePicker,
+                  child: Text(
+                    'Selecionar data',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    DateFormat('d MMM y').format(_selectedDate),
+                    textAlign: TextAlign.end,
+                  ),
+                )
+              ],
+            ),
+            ElevatedButton(
               onPressed: _submitForm,
-              child: Text('Salvar Transação'),
-              style: TextButton.styleFrom(primary: Colors.red.shade800),
+              child: Text(
+                'Salvar Transação',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              style: TextButton.styleFrom(primary: Colors.white),
             )
           ],
         ),
