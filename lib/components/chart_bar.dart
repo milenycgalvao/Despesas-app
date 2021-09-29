@@ -18,9 +18,12 @@ class ChartBar extends StatelessWidget {
 
     return Column(
       children: [
-        FittedBox(
-          //vai limitar o espaco para o texto e diminuir o tamanho dele se preciso
-          child: Text('${valueDay.toStringAsFixed(2)}'),
+        Container(
+          height: 20,
+          child: FittedBox(
+            //vai limitar o espaco para o texto e diminuir o tamanho dele se preciso
+            child: Text('${valueDay.toStringAsFixed(2)}'),
+          ),
         ),
         SizedBox(height: 5),
         Container(

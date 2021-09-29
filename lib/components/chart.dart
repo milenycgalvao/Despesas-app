@@ -31,7 +31,7 @@ class Chart extends StatelessWidget {
 
       //pegar a primeira letra do dia da semana
       return {'day': DateFormat.E().format(weekDay)[0], 'value': totalSum};
-    });
+    }).reversed.toList();
   }
 
   //funcao que retorna o total gasto na semana
