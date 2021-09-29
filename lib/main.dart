@@ -18,13 +18,25 @@ class DespesasApp extends StatelessWidget {
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: theme.colorScheme.copyWith(
-          secondary: Colors.red.shade800, //faz o que faz o accentColor
-          primary: Colors.purple.shade800, //faz o que faz o primaryColor
-        ),
-        //alterar de forma global a fonte:
-        fontFamily: 'Quicksand',
-      ),
+          colorScheme: theme.colorScheme.copyWith(
+            secondary: Colors.red.shade800, //faz o que faz o accentColor
+            primary: Colors.purple.shade800, //faz o que faz o primaryColor
+          ),
+          //alterar de forma global a fonte:
+          fontFamily: 'Quicksand',
+          //alterando os temas de appBar
+          /*appBarTheme: AppBarTheme(
+              titleTextStyle: TextStyle(
+            fontSize: 20,
+            fontFamily: 'OpenSans',
+          )),*/
+          textTheme: TextTheme(
+              headline6: TextStyle(
+            //headline6 fica como title
+            fontFamily: 'OpenSans',
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+          ))),
     );
   }
 } //colorScheme.secondary
@@ -102,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(
           'Despesas',
-          style: TextStyle(fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 18),
         ),
         actions: [
           //widget

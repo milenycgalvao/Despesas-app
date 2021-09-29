@@ -27,6 +27,7 @@ class ChartBar extends StatelessWidget {
           height: 60,
           width: 10,
           child: Stack(
+            //stack = usado para montar a barra empilhando os elementos dela
             //virar a barra de cabeça para baixo
             alignment: Alignment.bottomCenter,
             children: [
