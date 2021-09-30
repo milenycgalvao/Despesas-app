@@ -47,30 +47,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [
-    //lista provisoria que nao vai ser alterada ainda
-    /*Transaction(
-        id: 't0',
-        title: 'Conta de Internet',
-        value: 230.80,
-        date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(
-        id: 't1',
-        title: 'Comprinha na Shopee',
-        value: 23.45,
-        date: DateTime.now().subtract(Duration(days: 2))),
-    Transaction(
-        id: 't2',
-        title: 'Conta aghk',
-        value: 47.89,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-      id: 't3',
-      title: 'Conta aaa',
-      value: 40.90,
-      date: DateTime.now(),
-    ),*/
-  ];
+  final List<Transaction> transactions = [];
 
   List<Transaction> get _recentTransactions {
     return transactions.where((tr) {
@@ -95,6 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //widget do tipo statefull
     Navigator.of(context).pop(); //fechando o modal
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionsFormModal(BuildContext context) {
@@ -129,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions), //grafico
-            TransactionList(transactions),
+            TransactionList(transactions, _removeTransaction),
           ],
         ),
       ),
