@@ -13,7 +13,7 @@ class TransactionList extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Container(
-      height: 500,
+      height: 570,
       child: transactions.isEmpty //testar as transacoes
           ? Column(
               children: [
