@@ -26,8 +26,7 @@ class DespesasApp extends StatelessWidget {
           textTheme: TextTheme(
               headline6: TextStyle(
             fontFamily: 'OpenSans',
-            //considerar o tamanho de fonte que o usuario configurou no proprio celular
-            fontSize: 15 /** MediaQuery.of(context).textScaleFactor*/,
+            fontSize: 15,
             fontWeight: FontWeight.w700,
           ))),
     );
@@ -73,9 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionsFormModal(BuildContext context) {
     showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: (_) {
-          return TransactionForm(_addTransaction);
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: TransactionForm(_addTransaction),
+          );
         });
   }
 
@@ -99,12 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
 
-    //retrato
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Visibility(
-          visible: isPortrait,
+          visible: isPortrait, //retrato
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
