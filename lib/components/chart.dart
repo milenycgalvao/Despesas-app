@@ -8,7 +8,6 @@ class Chart extends StatelessWidget {
 
   Chart(this.recentTransaction);
 
-  //funcao de agrupamento
   List<Map<String, Object>> get groupedTransactions {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(
@@ -26,15 +25,10 @@ class Chart extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
-
-      //pegar a primeira letra do dia da semana
       return {'day': DateFormat.E().format(weekDay)[0], 'value': totalSum};
     }).reversed.toList();
   }
 
-  //funcao que retorna o total gasto na semana
   double get _weekTotalValue {
     return groupedTransactions.fold(
         0, (sum, tr) => sum + double.parse(tr['value'].toString()));
@@ -60,7 +54,6 @@ class Chart extends StatelessWidget {
                       : double.parse(tr['value'].toString()) / _weekTotalValue,
                   valueDay: double.parse(tr['value'].toString())),
             );
-            //Text('${tr['day']} : ${tr['value']} ');
           }).toList(),
         ),
       ),

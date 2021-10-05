@@ -19,22 +19,15 @@ class DespesasApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           colorScheme: theme.colorScheme.copyWith(
-            secondary: Colors.red.shade800, //faz o que faz o accentColor
-            primary: Colors.purple.shade800, //faz o que faz o primaryColor
+            secondary: Colors.red.shade800,
+            primary: Colors.purple.shade800,
           ),
-          //alterar de forma global a fonte:
           fontFamily: 'Quicksand',
-          //alterando os temas de appBar
-          /*appBarTheme: AppBarTheme(
-              titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontFamily: 'OpenSans',
-          )),*/
           textTheme: TextTheme(
               headline6: TextStyle(
-            //headline6 fica como title
             fontFamily: 'OpenSans',
-            fontSize: 15,
+            //considerar o tamanho de fonte que o usuario configurou no proprio celular
+            fontSize: 15 /** MediaQuery.of(context).textScaleFactor*/,
             fontWeight: FontWeight.w700,
           ))),
     );
@@ -51,7 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Transaction> get _recentTransactions {
     return transactions.where((tr) {
-      //retorna um bool
       return tr.date.isAfter(DateTime.now().subtract(
         Duration(days: 7),
       ));
@@ -70,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
       transactions.add(newTransaction);
     });
 
-    //widget do tipo statefull
     Navigator.of(context).pop(); //fechando o modal
   }
 
@@ -90,30 +81,56 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //p poder chamar as cores temas dentro do build (ou outra classe/arquivo)
-    //final ThemeData theme = Theme.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Despesas',
-          style: TextStyle(fontSize: 18),
-        ),
-        actions: [
-          //widget
-          IconButton(
-              onPressed: () => _openTransactionsFormModal(context),
-              icon: Icon(Icons.add))
-        ],
+    final appBar = AppBar(
+      title: Text(
+        'Despesas',
+        style: TextStyle(fontSize: 18),
       ),
+      actions: [
+        IconButton(
+            onPressed: () => _openTransactionsFormModal(context),
+            icon: Icon(Icons.add))
+      ],
+    );
+
+    final availabelHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
+    //retrato
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
-        //p fazer a rolagem
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Chart(_recentTransactions), //grafico
-            TransactionList(transactions, _removeTransaction),
-          ],
+        child: Visibility(
+          visible: isPortrait,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                height: availabelHeight * 0.25,
+                child: Chart(_recentTransactions),
+              ),
+              Container(
+                height: availabelHeight * 0.75,
+                child: TransactionList(transactions, _removeTransaction),
+              ),
+            ],
+          ),
+          replacement: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                height: availabelHeight * 0.4,
+                child: Chart(_recentTransactions),
+              ),
+              Container(
+                height: availabelHeight * 0.6,
+                child: TransactionList(transactions, _removeTransaction),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
