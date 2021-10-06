@@ -121,18 +121,35 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          replacement: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                height: availabelHeight * 0.4,
-                child: Chart(_recentTransactions),
-              ),
-              Container(
-                height: availabelHeight * 0.6,
-                child: TransactionList(transactions, _removeTransaction),
-              ),
-            ],
+          replacement: Visibility(
+            visible: MediaQuery.of(context).size.width <= 600, //celular
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  height: availabelHeight * 0.5,
+                  child: Chart(_recentTransactions),
+                ),
+                Container(
+                  height: availabelHeight * 0.5,
+                  child: TransactionList(transactions, _removeTransaction),
+                ),
+              ],
+            ),
+            replacement: Column(
+              //tablet
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  height: availabelHeight * 0.35,
+                  child: Chart(_recentTransactions),
+                ),
+                Container(
+                  height: availabelHeight * 0.65,
+                  child: TransactionList(transactions, _removeTransaction),
+                ),
+              ],
+            ),
           ),
         ),
       ),
