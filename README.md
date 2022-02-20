@@ -1,47 +1,67 @@
 # Despesas
-Um aplicativo para visualização e organização de gastos
+An app for viewing and organizing expenses
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/58363666/154751947-0823da66-94b6-4992-b22e-bf8d188e3b41.jpg " width="200px">
 <img src="https://user-images.githubusercontent.com/58363666/154754299-012afa4a-f6fb-40bf-9a18-ff1820747c9e.jpg" width="200px">
 <img src="https://user-images.githubusercontent.com/58363666/154754516-15e016fd-6554-4af4-9169-6e69ab54d115.jpg" width="200px">
 </div>
 
-## Visão geral
-Este projeto foi desenvolvido ao longo das seções 4, 5 e 6 do curso de flutter "Aprenda Flutter e Desenvolva Apps Para Android e IOS 2021" na plataforma da Udemy. Os objetivos deste aplicativo foi aprender a utilizar mais widgets, entender mais sobre a estrutura dos projetos de flutter, aprender sobre o funcionamento do flutter internamente e maneiras de deixar o aplicativo responsivo.
+## Overview
 
-## Recursos
-- assets/
-  
-  Pasta que contém o arquivo da imagem "zzz" e os arquivos das fontes utilizadas. Esses arquivos foram disponibilizados para uso no arquivo pubspec.yaml
+This project was developed along sections 4, 5 and 6 of the flutter course "Aprenda Flutter e Desenvolva Apps Para Android e IOS 2021" on the Udemy platform. The main objectives of this app were to understand more about the structure of flutter projects, learn about the functioning of flutter internally, and ways to make the app responsive.
 
-## Estrutura do projeto
 
-- lib/components/
+
+## Project estructure
+
+ `lib/main.dart` : This file is the starting point of the application. In it is all the structuring and calls of the application components. In it is also some functions that assist the state of application.
+ 
+### `assets/`
+
+  This folder contains the image file "zzz" and the source files used. These files have been made available for use by adding them to the pubspec.yaml file.
+
+
+### `lib/components/`
   
-  Pasta que contém os componentes do aplicativo que são chamados conforme se utiliza o aplicativo.
+  Folder that contains the application components that are called as you use the application.
   
-  - chart.dart
+   `chart.dart` : File where is the main structure of the chart, it divides it into 7 rows referring to the last 7 days.
     
-    Arquivo onde está a estrutura principal do gráfico, ela o divide em 7 fileiras referentes aos últimos 7 dias.
-  - chart_bar.dart
+   `chart_bar.dart` : File where is the structure of the bars of the graphic. They show the intensity of last week’s expenses.
     
-    Arquivo onde está a estrutura de cada barrinha do gráfico. Elas que mostram a intensidade dos gastos da última semana.
-  - transaction_form.dart
+   `transaction_form.dart` : File where is the structure and design of the bars of the graphic. They show the intensity of last week’s expenses.
     
-    Arquivo que contém a estrutura do formulário para adicionar uma despesa
-  - transaction_item.dart
+   `transaction_item.dart` : File containing the expense card structure that will be viewed inside the list.
     
-    Arquivo que contém a estrutura do card de despesa que será visualizado dentro da lista
-  - transaction_list.dart
-    
-    Arquivo que cria a estrutura da lista de despesas
+   `transaction_list.dart` : File that creat the expense list structure.
 
 
-- lib/src/
+### `lib/src/`
   
-  Esta pasta contém o arquivo transaction.dart, ele é uma classe que define uma transação contendo um id, um titulo, um valor e uma data.
+  This folder contains the transaction.dart file, it is a class that defines a transaction containing an id, a title, a value and a date.
+  
+  
+  
+ Obs.: Other folders and files are not explained above because they were not changed by the developer but by Flutter itself.
+ 
+ 
+ ## Getting Started
 
-- lib/main.dart
-  
-  Este arquivo é o ponto de partida da aplicação. Nele está toda a estruturação e chamadas dos componentes do aplicativo.
-  
+For run a Flutter project you will need to have installed:
+* Android Studio
+* Dart SDK
+* Flutter SDK
+* VSCode (optional)
+
+In this link, there is a guide for installing the respective software: https://docs.flutter.dev/get-started/install
+
+To iniciation a new Flutter project on VSCode you can follow the steps below:
+1. On a new window: `Control + Shift + P` (commands on Windows system)
+2. Look and click on `Flutter: New Project`
+3. Write the name you want for project
+
+### Running
+
+To run a Flutter project in VSCode you can press `F5` or write the command `Flutter run` on the terminal. Before run a Flutter project you can choice with which device you will want to run. If you will get run in a Android Studio emulator you will need to be with the emulator running before run the Flutter project and choose it at the bottom right in Vscode or you can run the emulator and write the command `Flutter run -d name-of-your-device` on terminal. 
+
